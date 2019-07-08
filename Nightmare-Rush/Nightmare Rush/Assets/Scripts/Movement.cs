@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     protected joyButton joyButton;
 
     protected bool jump;
+    private bool isGrounded;
 
     void Start()
     {
@@ -21,35 +22,42 @@ public class Movement : MonoBehaviour
         var rigidBody = GetComponent<Rigidbody>();
         rigidBody.velocity = new Vector3(joystick.Horizontal * 4f, rigidBody.velocity.y, joystick.Vertical * 4f);
 
-        if(!jump && joyButton.pressed)
+        if(isGrounded == false) 
         {
-            jump = true;
-            rigidBody.velocity += Vector3.up * 4f;
-            if (gameObject.tag == "ground")
+            
+            if (joyButton.pressed)
             {
                 jump = true;
+                rigidBody.velocity += Vector3.up * 3f;
             }
+
+
         }
 
-        if(jump && !joyButton.pressed)
+        if (isGrounded == true) 
         {
-            jump = false;
-            if (gameObject.tag == "ground")
+            if (!joyButton.pressed)
             {
                 jump = false;
             }
         }
     }
 
-    //void OnCollisionEnter(Collider other)
-    //{
-        
-    //}
+    void OnCollisionEnter(Collision other)
+    {
+        if (gameObject.tag == "ground")
+        {
+            isGrounded = true;
+        }
+    }
 
-    //void OnCollisionExit(Collider other)
-    //{
-        
-    //}
+    void OnCollisionExit(Collision other)
+    {
+        if (gameObject.tag == "ground")
+        {
+            isGrounded = false;
+        }
+    }
 
 
 }

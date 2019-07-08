@@ -24,6 +24,7 @@ public class joyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
+
         pressed = false;
     }
 }
