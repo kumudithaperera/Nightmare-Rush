@@ -14,7 +14,7 @@ public class joyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     
     void Update()
     {
-        
+       
     }
 
     public void OnPointerDown(PointerEventData eventData)

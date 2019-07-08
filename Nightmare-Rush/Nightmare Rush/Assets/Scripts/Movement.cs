@@ -19,18 +19,37 @@ public class Movement : MonoBehaviour
     void Update()
     {
         var rigidBody = GetComponent<Rigidbody>();
-        rigidBody.velocity = new Vector3(joystick.Horizontal * 5f, rigidBody.velocity.y, joystick.Vertical * 5f);
+        rigidBody.velocity = new Vector3(joystick.Horizontal * 4f, rigidBody.velocity.y, joystick.Vertical * 4f);
 
-        if (!jump && joyButton.pressed)
+        if(!jump && joyButton.pressed)
         {
             jump = true;
-            rigidBody.velocity += Vector3.up * 2f;
+            rigidBody.velocity += Vector3.up * 4f;
+            if (gameObject.tag == "ground")
+            {
+                jump = true;
+            }
         }
 
         if(jump && !joyButton.pressed)
         {
             jump = false;
+            if (gameObject.tag == "ground")
+            {
+                jump = false;
+            }
         }
     }
+
+    //void OnCollisionEnter(Collider other)
+    //{
+        
+    //}
+
+    //void OnCollisionExit(Collider other)
+    //{
+        
+    //}
+
 
 }
